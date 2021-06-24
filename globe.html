@@ -421,7 +421,7 @@
     var radius = 175;
     window.onload = function () {
       var globe = planetaryjs.planet();
-      globe.loadPlugin(autorotate(1));
+      globe.loadPlugin(autorotate(0.0041825919));
       globe.loadPlugin(planetaryjs.plugins.earth({
         topojson: { file: 'https://fumasa.org/world-110m.json' },
         oceans: { fill: '#000080' },
