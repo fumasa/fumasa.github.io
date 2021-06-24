@@ -3069,7 +3069,7 @@
                   points[i].startDrag();
                   break;
               }
-              
+
             } else {
               points[i].startDrag();
             }
@@ -3126,6 +3126,7 @@
       canvas.oncontextmenu = () => false;
 
 
+      tempLightings = [];
 
       // GUI
 
@@ -3170,14 +3171,9 @@
         lightning.startPoint.set(points[0]);
         lightning.endPoint.set(points[1]);
         var lightningLength = lightning.length();
-        lightning.step = Math.ceil(lightningLength / 10);
-        if (lightning.step < 5) lightning.step = 5;
-
-        lightning.update();
-        lightning.draw(context);
 
         var i, j, p;
-        tempLightings = [];
+        var count = 0;
 
         for (i = 0; i < points.length; i++) {
           p = points[i];
@@ -3192,21 +3188,35 @@
                   tempLightings[j] = [];
                 }
                 if (tempLightings[j][i] === undefined) {
-                  tempLightings[j][i] = new Lightning(points[j], p);
+                  tempLightings[j][i] = new Lightning(points[j], p, 3);
                 } else {
                   tempLightings[j][i].startPoint.set(points[j]);
                   tempLightings[j][i].endPoint.set(p);
                 }
                 tempLightings[j][i].step = Math.ceil(tempLightings[j][i].length() / 10);
                 if (tempLightings[j][i].step < 5) tempLightings[j][i].step = 5;
+                tempLightings[j][i].amplitude = 0.3;
+                // tempLightings[j][i].lineWidth = lightning.lineWidth * 0.3;
                 tempLightings[j][i].update();
                 tempLightings[j][i].draw(context);
+                count++;
               }
             }
             p.active = isActive;
           }
           p.draw(context);
         }
+
+        lightning.step = Math.ceil(lightningLength / 10);
+        if (lightning.step < 5) lightning.step = 5;
+
+        // if (count > 2) {
+        //   lightning.lineWidth = Math.ceil(lightning.lineWidth / (count * 1));
+        //   if (lightning.lineWidth < 0.1) lightning.lineWidth = 0.1;
+        // }
+
+        lightning.update();
+        lightning.draw(context);
 
         requestAnimationFrame(loop);
       };
