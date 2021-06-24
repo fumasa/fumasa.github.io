@@ -430,6 +430,7 @@
         };
     })();
 
+
     window.onload = function () {
       var globe = planetaryjs.planet();
       // Load our custom `autorotate` plugin; see below.
@@ -481,12 +482,10 @@
       var canvas = document.getElementById('globe');
       // Special code to handle high-density displays (e.g. retina, some phones)
       // In the future, Planetary.js will handle this by itself (or via a plugin).
-      if (window.devicePixelRatio == 2) {
-        canvas.width = 800;
-        canvas.height = 800;
-        context = canvas.getContext('2d');
-        context.scale(2, 2);
-      }
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      context = canvas.getContext('2d');
+      context.scale(2, 2);
       // Draw that globe!
       globe.draw(canvas);
 
