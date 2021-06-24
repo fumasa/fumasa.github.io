@@ -3123,6 +3123,9 @@
       canvas.addEventListener('mousemove', mouseMove, false);
       canvas.addEventListener('mousedown', mouseDown, false);
       canvas.addEventListener('mouseup', mouseUp, false);
+      canvas.addEventListener('touchmove', mouseMove, false);
+      canvas.addEventListener('touchstart', mouseDown, false);
+      canvas.addEventListener('touchend', mouseUp, false);
       canvas.oncontextmenu = () => false;
 
 
